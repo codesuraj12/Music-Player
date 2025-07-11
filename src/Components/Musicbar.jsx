@@ -1,0 +1,105 @@
+import React from 'react'
+import { useState,useRef } from 'react'
+
+const Musicbar = () => {
+    const [isPlaying, setIsPlaying] = useState(false)
+     const [currentIndex, setCurrentIndex] = useState(0);
+     const playerRef = useRef(null)
+
+const handlePlayPause = ()=>{
+    // if(!playerRef.current) return;
+    if(isPlaying){
+        playerRef.current.pause
+        
+    }
+        console.log(playerRef.current)
+    setIsPlaying(!isPlaying)
+}
+
+const musicLibrary = {
+    cool:[       
+            { name: 'Pop Song 1', file: '/music/cool/1st music.mp3' },
+      { name: 'Pop Song 2', file: '/music/cool/2nd music.mp3' },
+   
+    ],
+    rock:[ { name: 'Pop Song 1', file: '/music/rock/rock1.mp3' },]
+}
+
+ const allSongs = [...musicLibrary.cool, ...musicLibrary.rock]; //yha spread operator ka use krke sare songs ek hi array me jodega
+
+    return (
+        <div>
+
+                  {/* Track Info */}
+      <div className="mt-4 text-center">
+        <h3 className="font-semibold text-gray-800">Song Title</h3>
+        <p className="text-sm text-gray-500">Artist Name</p>
+      </div>
+            <div className="w-full  p-6 bg-white rounded-lg shadow-lg">
+                <div className="mb-6">
+                    <div
+                        className="slider relative h-2 bg-amber-300 rounded-full cursor-pointer"
+                    //   onClick={handleProgressChange}
+                    >
+                        <div
+                            className="absolute h-full bg-amber-500 rounded-full transition-all duration-150"
+                        // style={{ width: `${progress}%` }}
+                        ></div>
+                        <div
+                            className="pointer absolute rounded-full bg-black h-4 w-4 top-1/2 transform -translate-y-1/2 -translate-x-1/2 cursor-pointer hover:scale-110 transition-transform"
+                        // style={{ left: `${progress}%` }}
+                        ></div>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-500 mt-2">
+                        <span>1:23</span>
+                        <span>3:45</span>
+                    </div>
+                </div>
+                   {/* Control Buttons */}
+      <div className="flex items-center justify-center space-x-4">
+        {/* Previous Button */}
+        <button
+        //   onClick={handlePrevious}
+          className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+        >
+          <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+          </svg>
+        </button>
+
+        {/* Play/Pause Button */}
+        <button
+          onClick={handlePlayPause}
+          className="p-3 rounded-full bg-black text-white hover:bg-gray-800 transition-colors"
+        >
+          {isPlaying ? (
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          )}
+        </button>
+
+        {/* Next Button */}
+        <button
+        //   onClick={handleNext}
+          className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+        >
+          <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+          </svg>
+        </button>
+      </div>
+
+    
+    
+            </div>
+
+        </div>
+    )
+}
+
+export default Musicbar
