@@ -9,12 +9,20 @@ const Musicbar = () => {
 const handlePlayPause = ()=>{
     // if(!playerRef.current) return;
     if(isPlaying){
-        playerRef.current.pause
+        playerRef.current.pause()
+        setIsPlaying(false)
+
         
     }
+    else{
+   playerRef.current.play()
+   setIsPlaying(true)
+    }
         console.log(playerRef.current)
-    setIsPlaying(!isPlaying)
+    
 }
+
+
 
 const musicLibrary = {
     cool:[       
@@ -32,7 +40,7 @@ const musicLibrary = {
 
                   {/* Track Info */}
       <div className="mt-4 text-center">
-        <h3 className="font-semibold text-gray-800">Song Title</h3>
+        <h3 className="font-semibold text-gray-800">{allSongs[currentIndex]?.name}</h3>
         <p className="text-sm text-gray-500">Artist Name</p>
       </div>
             <div className="w-full  p-6 bg-white rounded-lg shadow-lg">
@@ -94,7 +102,7 @@ const musicLibrary = {
         </button>
       </div>
 
-    
+    <audio src="{allSongs[currentIndex].file} " ref={playerRef}></audio>
     
             </div>
 
