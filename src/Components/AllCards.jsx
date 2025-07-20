@@ -1,8 +1,11 @@
 import React from 'react'
 import Card from './Card'
 import Album from '/assets/album.jpg'
+import { useContext } from 'react'
+import { DarkModeContext } from '../context/Context'
 
 const AllCards = () => {
+   const{isDarkMode} = useContext(DarkModeContext)
 const cards = [
     {    
       id:1,
@@ -33,7 +36,7 @@ img :Album,
 
   return (
     <>
-    <div className='flex flex-wrap gap-6 p-6 item-center w-full'>
+    <div className={`flex flex-wrap gap-6 p-6 justify-center w-full ${isDarkMode ? 'bg-black text-amber-50':''}`}>
  {cards.map((card)=>(
 <Card
 key={card.id}
