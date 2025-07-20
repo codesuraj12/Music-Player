@@ -4,10 +4,13 @@ import { useState,useRef } from 'react'
 const Musicbar = () => {
     const [isPlaying, setIsPlaying] = useState(false)
      const [currentIndex, setCurrentIndex] = useState(0);
-     const playerRef = useRef(null)
+     const playerRef = useRef(null)  //this is for making audio play and pause
 
 const handlePlayPause = ()=>{
     // if(!playerRef.current) return;
+    if(!allSongs[currentIndex].file){
+      console.log('file nhi he')
+    }
     if(isPlaying){
         playerRef.current.pause()
         setIsPlaying(false)
@@ -21,19 +24,26 @@ const handlePlayPause = ()=>{
         console.log(playerRef.current)
     
 }
+const handleNext =()=>{
+  console.log(playerRef.current)
+}
 
 
 
 const musicLibrary = {
-    cool:[       
-            { name: 'Pop Song 1', file: '/music/cool/1st music.mp3' },
-      { name: 'Pop Song 2', file: '/music/cool/2nd music.mp3' },
+  cool:[   
+     { name: 'Coachella',file:'/music/cool/3rd music.mp3'},    
+    { name: 'Pop Song 1', file: '/music/cool/2nd music.mp3' },
+          { name: 'Pop Song 2', file: '/music/cool/1st music.mp3' },
+ 
+  ],
+  rock:[ 
    
-    ],
-    rock:[ { name: 'Pop Song 1', file: '/music/rock/rock1.mp3' },]
+    { name: 'Pop Song 1', file: '/music/rock/rock1.mp3' },
+  ],
 }
 
- const allSongs = [...musicLibrary.cool, ...musicLibrary.rock]; //yha spread operator ka use krke sare songs ek hi array me jodega
+ const allSongs = [...musicLibrary.cool, ...musicLibrary.rock,]; //yha spread operator ka use krke sare songs ek hi array me jodega
 
     return (
         <div>
@@ -93,7 +103,7 @@ const musicLibrary = {
 
         {/* Next Button */}
         <button
-        //   onClick={handleNext}
+          onClick={handleNext}
           className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
         >
           <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
@@ -102,7 +112,7 @@ const musicLibrary = {
         </button>
       </div>
 
-    <audio src="{allSongs[currentIndex].file} " ref={playerRef}></audio>
+    <audio src={allSongs[currentIndex].file} ref={playerRef}/>   {/* yha audio me current song ka index diya he */}
     
             </div>
 

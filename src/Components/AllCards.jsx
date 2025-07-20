@@ -21,13 +21,19 @@ img :Album,
 img :Album,
     title: 'Album Three',
      description: 'This is the third album description'
+},
+{
+   id:4,
+img :Album,
+    title: 'Album four',
+     description: 'This is the fourth album description'
 }
 
 ]
 
   return (
     <>
-    <div className='flex flex-wrap gap-6 p-6 content-center'>
+    <div className='flex flex-wrap gap-6 p-6 item-center w-full'>
  {cards.map((card)=>(
 <Card
 key={card.id}
