@@ -7,6 +7,7 @@ const{isDarkMode} = useContext(DarkModeContext)
 
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [next,setNext] = useState(0);
   const playerRef = useRef(null)  //this is for making audio play and pause
 
   const handlePlayPause = () => {
@@ -27,8 +28,19 @@ const{isDarkMode} = useContext(DarkModeContext)
     console.log(playerRef.current)
 
   }
+
   const handleNext = () => {
-    console.log(playerRef.current)
+    const Next = (currentIndex + 1) % allSongs.length
+   setCurrentIndex(Next);
+     setTimeout(() => {
+    if (playerRef.current) {
+
+        playerRef.current.play()
+         setIsPlaying(true)
+    }
+
+  }, 100);
+
   }
 
 

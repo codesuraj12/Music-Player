@@ -36,7 +36,7 @@ img :Album,
 
   return (
     <>
-    <div className={`flex flex-wrap gap-6 p-6 justify-center w-full ${isDarkMode ? 'bg-black text-amber-50':''}`}>
+    <div className={`flex flex-wrap gap-6 p-6 justify-center w-full h-full ${isDarkMode ? 'bg-black text-amber-50':''}`}>
  {cards.map((card)=>(
 <Card
 key={card.id}

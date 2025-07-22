@@ -19,7 +19,7 @@ function App() {
   return (
     <>
     <DarkModeContext.Provider value ={{isDarkMode,setIsDarkMode,toggleDarkMode}}>
-<div className={` transition-all duration-300 ${isDarkMode ?'bg-gray-800 text-white': 'bg-white text-gray-900'}`}>
+<div className={` transition-all duration-300 pb-30 ${isDarkMode ?'bg-gray-800 text-white': 'bg-white text-gray-900'}`}>
       <Navbar />
       {/* <p className='h-20'>horr</p> */}
       <HeroSection />
