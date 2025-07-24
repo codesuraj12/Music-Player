@@ -28,7 +28,7 @@ const{isDarkMode} = useContext(DarkModeContext)
     console.log(playerRef.current)
 
   }
-
+// next button
   const handleNext = () => {
     const Next = (currentIndex + 1) % allSongs.length
    setCurrentIndex(Next);
@@ -39,26 +39,45 @@ const{isDarkMode} = useContext(DarkModeContext)
          setIsPlaying(true)
     }
 
-  }, 100);
+  }, 200);
 
   }
+// previous button
+const handlePrevious =()=>{
+  const previous = ((currentIndex - 1 + allSongs.length) % allSongs.length)
+  setCurrentIndex(previous)
+setTimeout(() => {
+  if(playerRef.current){
+    playerRef.current.play()
+     setIsPlaying(true)
+  }
+}, 200);
+}
+
+
 
 
 
   const musicLibrary = {
     cool: [
-      { name: 'Coachella', file: '/music/cool/3rd music.mp3' },
-      { name: 'Pop Song 1', file: '/music/cool/2nd music.mp3' },
+     
+      { name: 'Weekend', file: '/music/cool/2nd music.mp3' },
       { name: 'Pop Song 2', file: '/music/cool/1st music.mp3' },
+      { name: 'Shaky', file: '/music/cool/4th music.mp3' },
+        { name: 'Faded', file: '/music/cool/3rd music.mp3' },
 
     ],
     rock: [
 
+      { name: 'Demon Slayer', file: '/music/rock/2nd music.mp3' },
       { name: 'Pop Song 1', file: '/music/rock/rock1.mp3' },
+       { name: 'Coachella', file: '/music/rock/3rd music.mp3' },
+    
+      { name: 'Golden', file: '/music/rock/1st music.mp3' },
     ],
   }
 
-  const allSongs = [...musicLibrary.cool, ...musicLibrary.rock,]; //yha spread operator ka use krke sare songs ek hi array me jodega
+  const allSongs = [...musicLibrary.rock, ...musicLibrary.cool,]; //yha spread operator ka use krke sare songs ek hi array me jodega
 
   return (
     <div className={`fixed bottom-0 w-full bg-amber-50 ${isDarkMode ? 'bg-black text-amber-50': 'bg-amber-50 text-black'}`}>
@@ -92,7 +111,7 @@ const{isDarkMode} = useContext(DarkModeContext)
         <div className="flex items-center justify-center space-x-4">
           {/* Previous Button */}
           <button
-            //   onClick={handlePrevious}
+              onClick={handlePrevious}
             className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
           >
             <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
