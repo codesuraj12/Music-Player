@@ -1,18 +1,44 @@
 import React, { useContext } from 'react'
+import Logo from '/assets/Music Logo.png'
 import { useState } from 'react';
 import { FiAlignJustify } from "react-icons/fi";
 import { DarkModeContext } from '../context/Context';
+import { RxCross1 } from "react-icons/rx";
+
 
 
 const Navbar = () => {
-const{isDarkMode, toggleDarkMode} = useContext(DarkModeContext)
+  const [visible, setVisible] = useState(false)
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext)
 
+  const handleNav = () => {
+    setVisible(!visible)
+
+  }
   return (
-    <nav className={`flex justify-between items-center p-4 shadow-md sticky top-0 transition-all duration-300 ${isDarkMode ? 'bg-black text-amber-50' : 'bg-amber-50 text-black'}`}>
-      <div className='text-3xl'>
-        < FiAlignJustify />
+    <nav className={`flex justify-between items-center z-10 p-4 shadow-md sticky top-0 ease-in-out duration-300 opacity-100 scale-100 ${isDarkMode ? 'bg-black text-amber-50' : 'bg-amber-50 text-black'}`}>
+ 
+      {/* hamburger */}
+      <div className='text-3xl  md:hidden'>
+        {visible ? <RxCross1 onClick={handleNav} /> : < FiAlignJustify onClick={handleNav} />}
       </div>
-      <ul className="flex space-x-8">
+           {/* logo */}
+           <div className=' w-20'>
+<img src={Logo} alt="logo" />
+      </div>
+      {/* Mobile View */}
+      {visible &&
+        <ul className="flex flex-col space-y-4 transition-all absolute top-16 left-0 w-full text-amber-50 bg-white dark:bg-black p-4 z-10 md:hidden">
+          <li className="hover:text-blue-600 cursor-pointer font-medium">Home</li>
+          <li className="hover:text-blue-600 cursor-pointer font-medium">About</li>
+          <li className="hover:text-blue-600 cursor-pointer font-medium">Services</li>
+        </ul>
+      }
+
+ 
+
+      {/* desktop view */}
+      <ul className="hidden md:flex space-x-8 ">
         <li className=" hover:text-blue-600 cursor-pointer font-medium">
           Home
         </li>
@@ -29,8 +55,8 @@ const{isDarkMode, toggleDarkMode} = useContext(DarkModeContext)
         <button
           onClick={toggleDarkMode}
           className={`relative w-16 h-8 rounded-full transition-all duration-300 ${isDarkMode
-              ? 'bg-blue-900'
-              : 'bg-gray-300'
+            ? 'bg-blue-900'
+            : 'bg-gray-300'
             }`}
           aria-label="Toggle dark mode"
         >
@@ -40,12 +66,7 @@ const{isDarkMode, toggleDarkMode} = useContext(DarkModeContext)
           </div>
         </button>
 
-        <button className="px-4 py-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-50 transition-colors">
-          Sign up
-        </button>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-          Login
-        </button>
+
       </div>
     </nav>
   )

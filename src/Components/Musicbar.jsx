@@ -72,7 +72,6 @@ setTimeout(() => {
       { name: 'Demon Slayer', file: '/music/rock/2nd music.mp3' },
       { name: 'Pop Song 1', file: '/music/rock/rock1.mp3' },
        { name: 'Coachella', file: '/music/rock/3rd music.mp3' },
-    
       { name: 'Golden', file: '/music/rock/1st music.mp3' },
     ],
   }

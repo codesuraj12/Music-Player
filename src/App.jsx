@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 
 import './App.css'
 import HeroSection from './Components/HeroSection'
@@ -11,13 +11,25 @@ import { DarkModeContext } from './context/Context'
 
 
 function App() {
+  const [loader,setLoader] = useState(true)
  const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleDarkMode = () => {
    setIsDarkMode(!isDarkMode)
   }
+  useEffect(() => {
+ const timer = setTimeout(()=>{
+  setLoader(false)
+ },2000)
+  
+    return () => {
+    clearTimeout(timer)
+    }
+  }, [])
+  
 
   return (
     <>
+   
     <DarkModeContext.Provider value ={{isDarkMode,setIsDarkMode,toggleDarkMode}}>
 <div className={` transition-all duration-300 pb-30 ${isDarkMode ?'bg-gray-800 text-white': 'bg-white text-gray-900'}`}>
       <Navbar />
