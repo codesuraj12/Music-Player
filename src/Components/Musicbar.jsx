@@ -10,8 +10,8 @@ const Musicbar = () => {
 
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0); //current song dikhane ke liye
-
-
+  const [currentTime, setCurrentTime] = useState('0:00')
+  const [progress, setProgress] = useState(0);
   const [allSongs, setallSongs] = useState([])  //this is for taking json file of songs
 
   const playerRef = useRef(null)  //this is for making audio play and pause
@@ -31,7 +31,7 @@ const Musicbar = () => {
       playerRef.current.play()
       setIsPlaying(true)
     }
-  
+
 
   }
   // next button
@@ -68,20 +68,42 @@ const Musicbar = () => {
     const total = Math.floor(audio.duration);
     const min = Math.floor((audio.duration) / 60);
     const sec = (total % 60).toString().padStart(2, '0')
-
- 
-
     return `${min}: ${sec}`
   }
 
   // songs playing time check
-  const songtiming = () => {
-  const audio = playerRef.current;
- 
-console.log(playerRef)
-  console.log(`Duration: ${audio.currentTime}`);
-};
+  const timingcheck = () => {
+    const audio = playerRef.current;
+    if (!audio || isNaN(audio.currentTime)) return '0:00'
 
+
+    let sec = Math.floor(audio.currentTime)
+    let min = Math.floor(sec / 60)
+    sec = (sec % 60).toString().padStart(2, '0')
+    //   if (sec < 10) {
+    //   sec= sec.toString().padStart(2, '0')
+
+    // }  ye logic upper short me likha he
+    console.log((audio.currentTime / audio.duration) * 100)
+    setCurrentTime(`${min}: ${sec}`)
+    // Set progress
+    const progressPercent = (audio.currentTime / audio.duration) * 100;
+    setProgress(progressPercent);
+  };
+
+// progress change by tapping
+const handleProgressChange =(e)=>{
+  let audio = playerRef.current;
+  const slider = e.currentTarget;
+  const sliderWidth = slider.offsetWidth;
+const pointer = e.nativeEvent.clientX
+const percent = pointer/sliderWidth
+audio.currentTime = percent * audio.duration;
+
+console.log(audio.currentTime)
+
+
+}
 
   // yha json file me se data laya gya he fetch krke
   useEffect(() => {
@@ -109,19 +131,19 @@ console.log(playerRef)
         <div className="mb-2">
           <div
             className="slider relative h-2 bg-amber-300 rounded-full cursor-pointer"
-          //   onClick={handleProgressChange}
+            onClick={handleProgressChange}
           >
             <div
               className="absolute h-full bg-amber-500 rounded-full transition-all duration-150"
-            // style={{ width: `${progress}%` }}
+              style={{ width: `${progress}%` }}
             ></div>
             <div
               className="pointer absolute rounded-full bg-black h-4 w-4 top-1/2 transform -translate-y-1/2 -translate-x-1/2 cursor-pointer hover:scale-110 transition-transform"
-            // style={{ left: `${progress}%` }}
+              style={{ left: `${progress}%` }}
             ></div>
           </div>
           <div className="flex justify-between text-sm text-gray-500 mt-2">
-            <span>{`0:00`}</span>
+            <span>{currentTime}</span>
             <span>{songduration()}</span>
           </div>
         </div>
@@ -168,7 +190,8 @@ console.log(playerRef)
           <audio
             src={allSongs[currentIndex]?.file}
             ref={playerRef}
-onTimeUpdate={songtiming}
+            onTimeUpdate={timingcheck}
+            onLoadedMetadata={timingcheck}
             onEnded={handleNext} // optional: auto-play next song
           />
         )}   {/* yha audio me current song ka index diya he */}
