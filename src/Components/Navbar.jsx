@@ -17,25 +17,25 @@ const Navbar = () => {
   }
   return (
     <nav className={`flex justify-between items-center z-10 p-4 shadow-md sticky top-0 ease-in-out duration-300 opacity-100 scale-100 ${isDarkMode ? 'bg-black text-amber-50' : 'bg-amber-50 text-black'}`}>
- 
+
       {/* hamburger */}
       <div className='text-3xl  md:hidden'>
         {visible ? <RxCross1 onClick={handleNav} /> : < FiAlignJustify onClick={handleNav} />}
       </div>
-           {/* logo */}
-           <div className=' w-20'>
-<img src={Logo} alt="logo" />
+      {/* logo */}
+      <div className=' w-20'>
+        <img src={Logo} alt="logo" />
       </div>
       {/* Mobile View */}
       {visible &&
-        <ul className="flex flex-col space-y-4 transition-all absolute top-16 left-0 w-full text-amber-50 bg-white dark:bg-black p-4 z-10 md:hidden">
+        <ul className="flex flex-col space-y-4 transition-all absolute top-full left-0 w-full text-amber-50 bg-white dark:bg-black p-4 z-10 md:hidden">
           <li className="hover:text-blue-600 cursor-pointer font-medium">Home</li>
           <li className="hover:text-blue-600 cursor-pointer font-medium">About</li>
           <li className="hover:text-blue-600 cursor-pointer font-medium">Services</li>
         </ul>
       }
 
- 
+
 
       {/* desktop view */}
       <ul className="hidden md:flex space-x-8 ">
