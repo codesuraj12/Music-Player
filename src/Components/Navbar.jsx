@@ -28,7 +28,7 @@ const Navbar = () => {
       </div>
       {/* Mobile View */}
       {visible &&
-        <ul className="flex flex-col space-y-4 transition-all absolute top-full left-0 w-full text-amber-50 bg-white dark:bg-black p-4 z-10 md:hidden">
+        <ul className="flex flex-col space-y-4 transition-all absolute top-full left-0 w-full text-black bg-white  p-4 z-10 md:hidden">
           <li className="hover:text-blue-600 cursor-pointer font-medium">Home</li>
           <li className="hover:text-blue-600 cursor-pointer font-medium">About</li>
           <li className="hover:text-blue-600 cursor-pointer font-medium">Services</li>

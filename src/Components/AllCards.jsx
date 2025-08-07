@@ -1,38 +1,14 @@
 import React from 'react'
 import Card from './Card'
-import Album from '/assets/album.jpg'
+
 import { useContext } from 'react'
 import { DarkModeContext } from '../context/Context'
+import { useNavigate } from 'react-router-dom'
+import cards from '../data/CardData'
 
 const AllCards = () => {
+   const navigate = useNavigate()
    const{isDarkMode} = useContext(DarkModeContext)
-const cards = [
-    {    
-      id:1,
-    img :Album,
- title: 'Album One',
-    description: 'This is the first album description'
-   },
-    {
-         id:2,
-img :Album,
-   title: 'Album Two',
-      description: 'This is the second album description'
-},
-{
-   id:3,
-img :Album,
-    title: 'Album Three',
-     description: 'This is the third album description'
-},
-{
-   id:4,
-img :Album,
-    title: 'Album four',
-     description: 'This is the fourth album description'
-}
-
-]
 
   return (
     <>
@@ -40,9 +16,10 @@ img :Album,
  {cards.map((card)=>(
 <Card
 key={card.id}
-img={Album}
+img={card.img}
 title={card.title}
 desc={card.description}
+onClick = {()=> navigate(`/card/${card.id}`)}
 />
  ))
  }
