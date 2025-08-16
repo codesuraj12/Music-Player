@@ -13,6 +13,7 @@ const Card = ({ img, desc, title, onClick }) => {
                 <img
                     src={img}
                     alt='img'
+                    loading='lazy'
                     className="w-full h-64 object-cover p-2 rounded-2xl"
                 />
                 <div className="p-4 h-32">
